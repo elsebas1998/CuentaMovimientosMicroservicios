@@ -1,5 +1,6 @@
 package com.cuenta.moviemiento.microservicio.persistence.services.impl;
 
+import com.cuenta.moviemiento.microservicio.Dto.MovimientoRequestDto;
 import com.cuenta.moviemiento.microservicio.persistence.entities.MovimientosEntity;
 import com.cuenta.moviemiento.microservicio.persistence.repository.MovimientoRepository;
 import com.cuenta.moviemiento.microservicio.persistence.services.MovimientoService;
@@ -20,8 +21,13 @@ public class MovimientoServiceImpl implements MovimientoService {
     }
 
     @Override
-    public MovimientosEntity crearMovimiento(MovimientosEntity movimiento) {
-        return movimientoRepository.save(movimiento);
+    public MovimientosEntity crearMovimiento(MovimientoRequestDto movimiento) {
+            MovimientosEntity movimientosEntity = new MovimientosEntity();
+            movimientosEntity.setFecha(movimiento.getFecha());
+            movimientosEntity.setSaldo(movimiento.getSaldo());
+            movimientosEntity.setValor(movimiento.getValor());
+            movimientosEntity.setTipoMovimiento(movimiento.getTipoMovimiento());
+            return movimientoRepository.save(movimientosEntity);
     }
 
     @Override
@@ -30,7 +36,7 @@ public class MovimientoServiceImpl implements MovimientoService {
     }
 
     @Override
-    public MovimientosEntity actualizarMovimiento(Long id, MovimientosEntity movimientoDetalles) {
+    public MovimientosEntity actualizarMovimiento(Long id, MovimientoRequestDto movimientoDetalles) {
         MovimientosEntity movimiento = movimientoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Movimiento no encontrado"));
         movimiento.setFecha(movimientoDetalles.getFecha());

@@ -1,8 +1,7 @@
 package com.cuenta.moviemiento.microservicio.controller;
 
 import com.cuenta.moviemiento.microservicio.Dto.MovimientoRequestDto;
-import com.cuenta.moviemiento.microservicio.persistence.entities.MovimientosEntity;
-import com.cuenta.moviemiento.microservicio.persistence.services.MovimientoService;
+import com.cuenta.moviemiento.microservicio.core.CoreServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,37 +12,26 @@ import java.util.Date;
 @RequestMapping("/movimiento/")
 public class MovimientoController {
     @Autowired
-    private MovimientoService movimientoService;
+    private CoreServices coreServices;
 
-    @GetMapping("obtener/{fecha}")
-    public ResponseEntity<MovimientosEntity> obtenerMovimiento(@PathVariable final Date fecha) {
-        return ResponseEntity.ok(movimientoService.obtenerMovimiento(fecha));
+    @GetMapping("/obtener/{fecha}")
+    public ResponseEntity<Object> obtenerMovimiento(@PathVariable final Date fecha) {
+        return coreServices.obtenerMovimiento(fecha);
     }
 
-    @PostMapping("crear")
-    public ResponseEntity<MovimientosEntity> crearMovimiento(@RequestBody final MovimientoRequestDto movimientoRequestDto) {
-        MovimientosEntity movimiento = new MovimientosEntity();
-        movimiento.setFecha(movimientoRequestDto.getFecha());
-        movimiento.setTipoMovimiento(movimientoRequestDto.getTipoMovimiento());
-        movimiento.setValor(movimientoRequestDto.getValor());
-        movimiento.setSaldo(movimientoRequestDto.getSaldo());
-        return ResponseEntity.ok(movimientoService.crearMovimiento(movimiento));
+    @PostMapping("/crear")
+    public ResponseEntity<Object> crearMovimiento(@RequestBody final MovimientoRequestDto movimientoRequestDto) {
+        return coreServices.crearMovimiento(movimientoRequestDto);
     }
 
-    @PutMapping("actualizar/{id}")
-    public ResponseEntity<MovimientosEntity> actualizarMovimiento(@PathVariable final Long id,
+    @PutMapping("/actualizar/{id}")
+    public ResponseEntity<Object> actualizarMovimiento(@PathVariable final Long id,
                                                                  @RequestBody final MovimientoRequestDto movimientoRequestDto) {
-        MovimientosEntity movimiento = new MovimientosEntity();
-        movimiento.setFecha(movimientoRequestDto.getFecha());
-        movimiento.setTipoMovimiento(movimientoRequestDto.getTipoMovimiento());
-        movimiento.setValor(movimientoRequestDto.getValor());
-        movimiento.setSaldo(movimientoRequestDto.getSaldo());
-        return ResponseEntity.ok(movimientoService.actualizarMovimiento(id, movimiento));
+        return coreServices.actualizarMovimiento(id, movimientoRequestDto);
     }
 
-    @DeleteMapping("eliminar/{id}")
-    public ResponseEntity<Void> eliminarMovimiento(@PathVariable final Long id) {
-        movimientoService.eliminarMovimiento(id);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Object> eliminarMovimiento(@PathVariable final Long id) {
+        return eliminarMovimiento(id);
     }
 }

@@ -1,5 +1,6 @@
 package com.cuenta.moviemiento.microservicio.persistence.services.impl;
 
+import com.cuenta.moviemiento.microservicio.Dto.CuentaRequestDto;
 import com.cuenta.moviemiento.microservicio.persistence.entities.CuentaEntity;
 import com.cuenta.moviemiento.microservicio.persistence.repository.CuentaRepository;
 import com.cuenta.moviemiento.microservicio.persistence.services.CuentaService;
@@ -18,8 +19,13 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public CuentaEntity crearCuenta(CuentaEntity cuenta) {
-        return cuentaRepository.save(cuenta);
+    public CuentaEntity crearCuenta(CuentaRequestDto cuenta) {
+        CuentaEntity cuentaEntity = new CuentaEntity();
+        cuentaEntity.setNumeroCuenta(cuenta.getNumeroCuenta());
+        cuentaEntity.setTipoCuenta(cuenta.getTipoCuenta());
+        cuentaEntity.setSaldoInicial(cuenta.getSaldoInicial());
+        cuentaEntity.setEstado(cuenta.getEstado());
+        return cuentaRepository.save(cuentaEntity);
     }
 
     @Override
@@ -28,7 +34,7 @@ public class CuentaServiceImpl implements CuentaService {
     }
 
     @Override
-    public CuentaEntity actualizarCuenta(String numeroCuenta, CuentaEntity cuentaDetalles) {
+    public CuentaEntity actualizarCuenta(String numeroCuenta, CuentaRequestDto cuentaDetalles) {
         CuentaEntity cuenta = cuentaRepository.findByNumeroCuenta(numeroCuenta)
                 .orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
         cuenta.setTipoCuenta(cuentaDetalles.getTipoCuenta());
