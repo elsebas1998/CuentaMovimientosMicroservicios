@@ -7,6 +7,8 @@ import com.cuenta.moviemiento.microservicio.persistence.services.CuentaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CuentaServiceImpl implements CuentaService {
     @Autowired
@@ -17,6 +19,10 @@ public class CuentaServiceImpl implements CuentaService {
         return cuentaRepository.findByNumeroCuenta(numeroCuenta)
                 .orElseThrow(() -> new RuntimeException("Cuenta no encontrada"));
     }
+    @Override
+    public List<CuentaEntity> obtenerCuentasCliente(String identificacion) {
+        return cuentaRepository.findByIdentificacionCliente(identificacion);
+    }
 
     @Override
     public CuentaEntity crearCuenta(CuentaRequestDto cuenta) {
@@ -25,6 +31,7 @@ public class CuentaServiceImpl implements CuentaService {
         cuentaEntity.setTipoCuenta(cuenta.getTipoCuenta());
         cuentaEntity.setSaldoInicial(cuenta.getSaldoInicial());
         cuentaEntity.setEstado(cuenta.getEstado());
+        cuentaEntity.setIdentificacionCliente(cuenta.getIdentificacionCliente());
         return cuentaRepository.save(cuentaEntity);
     }
 
@@ -42,5 +49,7 @@ public class CuentaServiceImpl implements CuentaService {
         cuenta.setEstado(cuentaDetalles.getEstado());
         return cuentaRepository.save(cuenta);
     }
+
+
 }
 

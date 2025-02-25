@@ -1,11 +1,14 @@
 package com.cuenta.moviemiento.microservicio.core;
 
 import com.cuenta.moviemiento.microservicio.Dto.CuentaRequestDto;
+import com.cuenta.moviemiento.microservicio.Dto.EstadoCuentaDTO;
 import com.cuenta.moviemiento.microservicio.Dto.MovimientoRequestDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 
+import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 
 public interface CoreServices {
@@ -24,7 +27,10 @@ public interface CoreServices {
 
     ResponseEntity<Object> eliminarCuenta(String numeroCuenta);
 
+    List<EstadoCuentaDTO> generarReporte(String clienteId, LocalDate fechaInicio, LocalDate fechaFin);
     ResponseEntity<Object> eliminarMovimiento(Long id);
+
+    ResponseEntity<Object> crearMovimientoTransaccional(String numeroCuenta, BigDecimal valor);
 
 
 

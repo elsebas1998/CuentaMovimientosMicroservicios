@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Data
 @Entity
 @Table(name = "cuenta")
@@ -16,8 +18,17 @@ public class CuentaEntity {
     private Long id;
     private String numeroCuenta;
     private String tipoCuenta;
-    private Double saldoInicial;
-    private String estado;
+    private BigDecimal saldoInicial;
+    private Boolean estado;
+    private String identificacionCliente;
+
+    public String getIdentificacionCliente() {
+        return identificacionCliente;
+    }
+
+    public void setIdentificacionCliente(String identificacionCliente) {
+        this.identificacionCliente = identificacionCliente;
+    }
 
     public Long getId() {
         return id;
@@ -43,19 +54,19 @@ public class CuentaEntity {
         this.tipoCuenta = tipoCuenta;
     }
 
-    public Double getSaldoInicial() {
+    public BigDecimal getSaldoInicial() {
         return saldoInicial;
     }
 
-    public void setSaldoInicial(Double saldoInicial) {
+    public void setSaldoInicial(BigDecimal saldoInicial) {
         this.saldoInicial = saldoInicial;
     }
 
-    public String getEstado() {
+    public Boolean getEstado() {
         return estado;
     }
 
-    public void setEstado(String estado) {
+    public void setEstado(Boolean estado) {
         this.estado = estado;
     }
 }

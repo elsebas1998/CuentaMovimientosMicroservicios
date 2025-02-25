@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -18,9 +19,17 @@ public class MovimientosEntity {
     private Long id;
     private Date fecha;
     private String tipoMovimiento;
-    private Double valor;
-    private Double saldo;
+    private BigDecimal valor;
+    private BigDecimal saldo;
+    private Integer codCuenta;
 
+    public Integer getCodCuenta() {
+        return codCuenta;
+    }
+
+    public void setCodCuenta(Integer codCuenta) {
+        this.codCuenta = codCuenta;
+    }
 
     public Long getId() {
         return id;
@@ -46,19 +55,19 @@ public class MovimientosEntity {
         this.tipoMovimiento = tipoMovimiento;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public Double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Double saldo) {
+    public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
 }

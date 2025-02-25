@@ -7,7 +7,9 @@ import com.cuenta.moviemiento.microservicio.persistence.services.MovimientoServi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class MovimientoServiceImpl implements MovimientoService {
@@ -44,5 +46,10 @@ public class MovimientoServiceImpl implements MovimientoService {
         movimiento.setValor(movimientoDetalles.getValor());
         movimiento.setSaldo(movimientoDetalles.getSaldo());
         return movimientoRepository.save(movimiento);
+    }
+
+    @Override
+    public List<MovimientosEntity> obtenerMovimientos(Integer codCuenta, LocalDate fechaInicio, LocalDate fechaFin) {
+        return movimientoRepository.findByCodCuentaAndFechaBetween(codCuenta, fechaInicio, fechaFin);
     }
 }

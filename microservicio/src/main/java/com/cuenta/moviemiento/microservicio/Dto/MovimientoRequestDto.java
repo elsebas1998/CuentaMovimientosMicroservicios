@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 @Data
@@ -16,9 +17,19 @@ public class MovimientoRequestDto {
     @NotNull
     private String tipoMovimiento;
     @NotNull
-    private Double valor;
+    private BigDecimal valor;
     @NotNull
-    private Double saldo;
+    private BigDecimal saldo;
+
+    private Integer codCuenta;
+
+    public Integer getCodCuenta() {
+        return codCuenta;
+    }
+
+    public void setCodCuenta(Integer codCuenta) {
+        this.codCuenta = codCuenta;
+    }
 
     public Date getFecha() {
         return fecha;
@@ -36,19 +47,19 @@ public class MovimientoRequestDto {
         this.tipoMovimiento = tipoMovimiento;
     }
 
-    public Double getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(Double valor) {
+    public void setValor(BigDecimal valor) {
         this.valor = valor;
     }
 
-    public Double getSaldo() {
+    public BigDecimal getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(Double saldo) {
+    public void setSaldo(BigDecimal saldo) {
         this.saldo = saldo;
     }
 }
