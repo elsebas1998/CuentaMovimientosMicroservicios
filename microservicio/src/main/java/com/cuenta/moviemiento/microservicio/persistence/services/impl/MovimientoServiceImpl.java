@@ -29,6 +29,7 @@ public class MovimientoServiceImpl implements MovimientoService {
             movimientosEntity.setSaldo(movimiento.getSaldo());
             movimientosEntity.setValor(movimiento.getValor());
             movimientosEntity.setTipoMovimiento(movimiento.getTipoMovimiento());
+            movimientosEntity.setCodCuenta(movimiento.getCodCuenta());
             return movimientoRepository.save(movimientosEntity);
     }
 

@@ -20,11 +20,11 @@ public class CoreController {
     private CoreServices coreServices;
     @GetMapping("/reportes")
     public ResponseEntity<List<EstadoCuentaDTO>> generarReporte(
-            @RequestParam String clienteId,
+            @RequestParam String identificacion,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaInicio,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate fechaFin) {
 
-        List<EstadoCuentaDTO> reporte = coreServices.generarReporte(clienteId, fechaInicio, fechaFin);
+        List<EstadoCuentaDTO> reporte = coreServices.generarReporte(identificacion, fechaInicio, fechaFin);
         return ResponseEntity.ok(reporte);
     }
 

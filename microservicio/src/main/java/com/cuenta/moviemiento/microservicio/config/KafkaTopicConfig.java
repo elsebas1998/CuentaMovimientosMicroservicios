@@ -11,6 +11,7 @@ public class KafkaTopicConfig {
     public static final String TOPIC_CLIENTE_REQUEST = "cliente-info-request";
     public static final String TOPIC_CLIENTE_RESPONSE = "cliente-info-response";
 
+
     @Bean
     public NewTopic clienteRequestTopic() {
         return TopicBuilder.name(TOPIC_CLIENTE_REQUEST)

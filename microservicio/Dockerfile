@@ -1,8 +1,10 @@
 FROM openjdk:17-jdk-slim
 
-WORKDIR /app
+LABEL maintainer="jordyjaja@hotmail.com"
+LABEL version="1.0"
 
-COPY target/microservicio2.jar app.jar
+WORKDIR /app
+COPY target/microservicio1.jar app.jar
 
 EXPOSE 8082
 
